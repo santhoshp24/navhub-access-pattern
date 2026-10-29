@@ -1,0 +1,6 @@
+AppName,UserEmail,ClusterCode,RoleName,Notes
+ALL,alice@example.com,ALL,Super Admin,Wildcard: every cluster in every app
+Demo Maritime,bob@example.com,OPS_HUB,Viewer,
+Demo Maritime,carol@example.com,OPS_HUB,Viewer,
+Demo Maritime,carol@example.com,HSE_HUB,Viewer,
+Demo Maritime,dave@vendor-example.com,OPS_HUB,External Viewer,Vendor account

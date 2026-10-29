@@ -1,0 +1,9 @@
+AppName,ClusterCode,SubClusterName,DashboardName,ReportURL,SortOrder
+Demo Maritime,OPS_HUB,Berth,Berth Utilisation,https://example.com/reports/berth-utilisation,1
+Demo Maritime,OPS_HUB,Berth,Vessel Waiting Time,https://example.com/reports/vessel-waiting,2
+Demo Maritime,OPS_HUB,Cargo,Container Throughput,https://example.com/reports/container-throughput,1
+Demo Maritime,OPS_HUB,Cargo,Dwell Time,https://example.com/reports/dwell-time,2
+Demo Maritime,FIN_HUB,Revenue,Revenue Summary,https://example.com/reports/revenue-summary,1
+Demo Maritime,FIN_HUB,Cost,Cost Overview,https://example.com/reports/cost-overview,1
+Demo Maritime,HSE_HUB,Incidents,Incident Tracker,https://example.com/reports/incident-tracker,1
+Demo Logistics,FLEET_HUB,Trucks,Fleet Availability,https://example.com/reports/fleet-availability,1

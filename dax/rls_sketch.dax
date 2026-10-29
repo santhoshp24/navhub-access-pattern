@@ -1,0 +1,56 @@
+// ILLUSTRATIVE SKETCH - not tested in Power BI from this repo.
+// Verify with Modeling > View as roles before relying on it.
+//
+// RLS filter expression for the DashboardIndex table.
+// Table names and columns match sample_config/. The reference implementation that defines the
+// intended behaviour (and is unit tested) is src/navhub/access.py.
+
+VAR _user = LOWER ( USERPRINCIPALNAME () )
+VAR _app = DashboardIndex[AppName]
+VAR _cluster = DashboardIndex[ClusterCode]
+VAR _sub = DashboardIndex[SubClusterName]
+VAR _name = DashboardIndex[DashboardName]
+
+// Layer 1: default deny, 'ALL' wildcard for app and/or cluster
+VAR _hasCluster =
+    COUNTROWS (
+        FILTER (
+            UserClusterAccess,
+            LOWER ( UserClusterAccess[UserEmail] ) = _user
+                && ( UserClusterAccess[AppName] = "ALL" || UserClusterAccess[AppName] = _app )
+                && ( UserClusterAccess[ClusterCode] = "ALL" || UserClusterAccess[ClusterCode] = _cluster )
+        )
+    ) > 0
+
+// Layer 2: restrict-only. Zero rows for this user+app+cluster means not restricted
+VAR _subRows =
+    FILTER (
+        UserSubClusterAccess,
+        LOWER ( UserSubClusterAccess[UserEmail] ) = _user
+            && UserSubClusterAccess[AppName] = _app
+            && UserSubClusterAccess[ClusterCode] = _cluster
+    )
+VAR _subOk =
+    COUNTROWS ( _subRows ) = 0
+        || COUNTROWS ( FILTER ( _subRows, UserSubClusterAccess[SubClusterName] = _sub ) ) > 0
+
+// Layer 3: restrict-only, same rule
+VAR _dashRows =
+    FILTER (
+        UserDashboardAccess,
+        LOWER ( UserDashboardAccess[UserEmail] ) = _user
+            && UserDashboardAccess[AppName] = _app
+            && UserDashboardAccess[ClusterCode] = _cluster
+    )
+VAR _dashOk =
+    COUNTROWS ( _dashRows ) = 0
+        || COUNTROWS (
+            FILTER (
+                _dashRows,
+                UserDashboardAccess[SubClusterName] = _sub
+                    && UserDashboardAccess[DashboardName] = _name
+            )
+        ) > 0
+
+RETURN
+    _hasCluster && _subOk && _dashOk

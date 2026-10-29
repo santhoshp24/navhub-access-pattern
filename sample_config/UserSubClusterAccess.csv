@@ -1,0 +1,3 @@
+AppName,UserEmail,ClusterCode,SubClusterName,Notes
+Demo Maritime,bob@example.com,OPS_HUB,Berth,Bob only sees the Berth sub-cluster
+Demo Maritime,dave@vendor-example.com,OPS_HUB,Cargo,Vendor only sees Cargo

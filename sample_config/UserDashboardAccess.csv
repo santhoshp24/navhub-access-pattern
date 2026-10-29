@@ -1,0 +1,4 @@
+AppName,UserEmail,ClusterCode,SubClusterName,DashboardName
+Demo Maritime,carol@example.com,OPS_HUB,Cargo,Container Throughput
+Demo Maritime,carol@example.com,OPS_HUB,Berth,Berth Utilisation
+Demo Maritime,dave@vendor-example.com,OPS_HUB,Cargo,Dwell Time

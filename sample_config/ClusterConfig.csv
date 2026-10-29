@@ -1,0 +1,5 @@
+AppName,ClusterCode,ClusterName,IconTheme,SortOrder
+Demo Maritime,OPS_HUB,Port Operations,Light,1
+Demo Maritime,FIN_HUB,Finance,Light,2
+Demo Maritime,HSE_HUB,Health & Safety,Dark,3
+Demo Logistics,FLEET_HUB,Fleet,Light,1
